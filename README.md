@@ -1,3 +1,6 @@
+A project By Noah Paige
+Created as part of a job application to iFixit
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
