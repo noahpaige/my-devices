@@ -10,9 +10,7 @@ class SearchBar extends Component {
       <Form>
         <Form.Group controlId="searchString">
           <Form.Control
-            onChange={event =>
-              this.props.handleSearchChange(event.target.value)
-            }
+            onChange={event => this.props.onChange(event.target.value)}
             placeholder="Search for a device"
           />
         </Form.Group>

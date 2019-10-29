@@ -102,12 +102,12 @@ class App extends Component {
   };
 
   handleSearchStringChange = searchStr => {
-    if (searchStr === "") {
-      searchResults = [];
-    } else {
-      searchResults = getFilteredResults(searchStr);
-    }
-    this.setState({ searchResults });
+    if (searchStr !== "") {
+      getFilteredResults(searchStr).then(response => {
+        console.log("response: " + response);
+        this.setState({ searchResults: response });
+      });
+    } else this.setState({ searchResults: [] });
   };
 
   render() {
@@ -117,7 +117,7 @@ class App extends Component {
           className="align-middle m-2"
           style={{ width: "50vw", height: "50vh" }}
         >
-          <SearchBar />
+          <SearchBar onChange={this.handleSearchStringChange} />
         </div>
       </div>
     );
@@ -126,4 +126,43 @@ class App extends Component {
 
 export default App;
 
-function getFilteredResults(searchStr) {}
+//================================ helper functions ================================
+
+function getFilteredResults(searchStr) {
+  let requestString = "https://www.ifixit.com/api/2.0/search/";
+  requestString +=
+    removeSpaces(searchStr) + "?c-doctype_namespace=product&doctype=topic";
+
+  let searchResults = fetch(requestString)
+    .then(results => {
+      return results.json();
+    })
+    .then(function(data) {
+      return filterAndFormatResults(data.results);
+    })
+    .catch(function(error) {
+      console.log(error);
+      return [];
+    });
+  return searchResults;
+}
+
+function removeSpaces(searchStr) {
+  return searchStr.replace(/\s/g, "%20");
+}
+
+function filterAndFormatResults(searchData) {
+  let output = [];
+  for (let i = 0; i < searchData.length; i++) {
+    const element = searchData[i];
+    if (element.dataType === "wiki" && element.namespace === "CATEGORY") {
+      output.push({
+        id: element.wikiid,
+        name: element.title,
+        image: element.image.medium,
+        wikiLink: element.url
+      });
+    }
+  }
+  return output;
+}
