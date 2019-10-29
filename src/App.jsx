@@ -101,6 +101,15 @@ class App extends Component {
     this.setState({ myDevices });
   };
 
+  handleSearchStringChange = searchStr => {
+    if (searchStr === "") {
+      searchResults = [];
+    } else {
+      searchResults = getFilteredResults(searchStr);
+    }
+    this.setState({ searchResults });
+  };
+
   render() {
     return (
       <div style={{ width: "100vw", height: "100vh" }}>
@@ -116,3 +125,5 @@ class App extends Component {
 }
 
 export default App;
+
+function getFilteredResults(searchStr) {}
