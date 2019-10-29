@@ -7,7 +7,7 @@ import Col from "react-bootstrap/Col";
 class ownedDevice extends Component {
   render() {
     return (
-      <Card border="primary m-2" style={{ width: "100%" }}>
+      <Card border="primary" style={{ width: "100%" }}>
         <div className="gridContainer">
           <Row>
             <Col xs={2}>
