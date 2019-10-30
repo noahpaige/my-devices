@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import SearchResult from "./searchResult";
 
 import Row from "react-bootstrap/Row";
+import Card from "react-bootstrap/Card";
 
 class SearchResultList extends Component {
   state = {};
@@ -15,28 +16,32 @@ class SearchResultList extends Component {
   render() {
     return (
       <div
-        className="container"
         style={{
-          overflowY: "auto",
-          overflowX: "hidden"
+          position: "relative",
+          overflow: "hidden",
+          backgroundColor: "#dddddd",
+          margin: "2"
         }}
       >
-        {this.props.showResults
-          ? this.props.searchResults.map(deviceInfo => (
-              <Row
-              //style={{ height: "12rem" }}
-              >
-                <SearchResult key={deviceInfo.id} deviceInfo={deviceInfo} />
-              </Row>
-            ))
-          : null}
-        {/* {this.props.searchResults.map(deviceInfo => (
-          <Row
-          //style={{ height: "12rem" }}
-          >
-            <SearchResult key={deviceInfo.id} deviceInfo={deviceInfo} />
-          </Row>
-        ))} */}
+        <div
+          className="container"
+          style={{
+            width: "96%",
+            overflowY: "auto",
+            overflowX: "hidden"
+          }}
+        >
+          {this.props.showResults
+            ? this.props.searchResults.map(deviceInfo => (
+                <Row>
+                  <SearchResult
+                    key={deviceInfo.wikiLink}
+                    deviceInfo={deviceInfo}
+                  />
+                </Row>
+              ))
+            : null}
+        </div>
       </div>
     );
   }

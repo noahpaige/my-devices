@@ -1,3 +1,4 @@
+import "../styles/styles.css";
 import React, { Component, createRef } from "react";
 
 import FormControl from "react-bootstrap/FormControl";
@@ -22,11 +23,7 @@ class SearchBar extends Component {
   };
 
   handleClickOutside = e => {
-    if (this.state.node.current.contains(e.target)) {
-      // inside click
-      return;
-    }
-    // outside click
+    if (this.state.node.current.contains(e.target)) return;
     this.setState({ showResults: false });
   };
 
@@ -36,18 +33,24 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div style={{ height: "38px" }} ref={this.state.node}>
+      <div
+        className="hide-scrollbar"
+        style={{ height: "38px" }}
+        ref={this.state.node}
+      >
         <FormControl
           onClick={this.handleClickInside}
           onChange={event => this.handleChange(event.target.value)}
           placeholder="Search for a device"
         />
         <div
+          className="hide-scrollbar"
           style={{
             maxHeight: "300px",
             position: "relative",
-            top: "100%",
-            overflowY: "scroll"
+            top: "3px",
+            overflowY: "scroll",
+            borderRadius: "5px"
           }}
         >
           <SearchResultList

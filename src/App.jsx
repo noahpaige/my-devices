@@ -91,7 +91,8 @@ class App extends Component {
         wikiLink: "https://www.ifixit.com/Device/Xbox_One"
       }
     ],
-    searchResults: []
+    searchResults: [],
+    previousResults: []
   };
 
   handleDelete = deviceId => {
@@ -103,7 +104,11 @@ class App extends Component {
     if (searchStr !== "") {
       getFilteredResults(searchStr).then(response => {
         console.log("response: " + response);
-        this.setState({ searchResults: response });
+        if (response.length > 0) {
+          console.log("HEROO");
+          this.setState({ previousResults: this.state.searchResults });
+          this.setState({ searchResults: response });
+        } else this.setState({ searchResults: this.state.previousResults });
       });
     } else this.setState({ searchResults: [] });
   };
@@ -151,7 +156,6 @@ function getFilteredResults(searchStr) {
 function removeSpaces(searchStr) {
   return searchStr.replace(/\s/g, "%20");
 }
-
 function filterAndFormatResults(searchData) {
   let output = [];
   for (let i = 0; i < searchData.length; i++) {

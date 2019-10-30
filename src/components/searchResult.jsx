@@ -26,10 +26,8 @@ class SearchResult extends Component {
                 }}
               />
             </Col>
-            <Col>
-              <h5 style={{ textAlign: "center" }}>
-                {this.props.deviceInfo.name}
-              </h5>
+            <Col style={{ display: "flex" }}>
+              <h5 style={{ margin: "auto" }}>{this.props.deviceInfo.name}</h5>
             </Col>
           </Row>
         </div>
