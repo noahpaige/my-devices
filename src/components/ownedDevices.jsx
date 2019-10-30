@@ -18,14 +18,14 @@ class OwnedDevices extends Component {
           overflowX: "hidden"
         }}
       >
-        {this.props.ownedDevices.map(deviceInfo => (
+        {this.state.items.map(deviceInfo => (
           <Row
           //style={{ height: "12rem" }}
           >
             <OwnedDevice
               key={deviceInfo.id}
               deviceInfo={deviceInfo}
-              onDelete={this.props.onDelete}
+              onDelete={this.props.handleDelete}
             />
           </Row>
         ))}

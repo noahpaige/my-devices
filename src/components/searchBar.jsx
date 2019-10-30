@@ -9,23 +9,22 @@ class SearchBar extends Component {
     showResults: false,
     node: createRef()
   };
+  //static node = createRef();
 
   handleChange = searchStr => {
-    this.props.onChange(searchStr);
+    console.log("Mounting searchbar");
     if (this.props.searchResults.length > 0)
       this.setState({ showResults: true });
     this.props.onChange(searchStr);
-    console.log("show results? " + this.state.showResults);
   };
   handleClickInside = () => {
+    console.log("CLICKED INSIDE");
     this.setState({ showResults: true });
-    console.log("Clicked inside search");
   };
 
   handleClickOutside = e => {
     if (this.state.node.current.contains(e.target)) return;
     this.setState({ showResults: false });
-    console.log("Clicked outside search");
   };
 
   componentDidMount() {
@@ -55,7 +54,6 @@ class SearchBar extends Component {
           }}
         >
           <SearchResultList
-            onAddDevice={this.props.onAddDevice}
             searchResults={this.props.searchResults}
             showResults={this.state.showResults}
           />
