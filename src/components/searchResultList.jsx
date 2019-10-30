@@ -3,16 +3,8 @@ import React, { Component } from "react";
 import SearchResult from "./searchResult";
 
 import Row from "react-bootstrap/Row";
-import Card from "react-bootstrap/Card";
 
 class SearchResultList extends Component {
-  state = {};
-
-  handleDelete = deviceId => {
-    const items = this.state.items.filter(d => d.id !== deviceId);
-    this.setState({ items });
-  };
-
   render() {
     return (
       <div
@@ -37,6 +29,7 @@ class SearchResultList extends Component {
                   <SearchResult
                     key={deviceInfo.wikiLink}
                     deviceInfo={deviceInfo}
+                    onAddDevice={this.props.onAddDevice}
                   />
                 </Row>
               ))

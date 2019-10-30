@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
-//import NavBar from "./components/navbar";
 import SearchBar from "./components/searchBar";
+import OwnedDevices from "./components/ownedDevices";
 
 class App extends Component {
   state = {
@@ -101,6 +101,7 @@ class App extends Component {
   };
 
   handleSearchStringChange = searchStr => {
+    console.log("search string changed");
     if (searchStr !== "") {
       getFilteredResults(searchStr).then(response => {
         console.log("response: " + response);
@@ -113,6 +114,12 @@ class App extends Component {
     } else this.setState({ searchResults: [] });
   };
 
+  handleAddDevice = deviceData => {
+    this.setState({ previousResults: [] });
+    this.setState({ searchResults: [] });
+    this.setState({ myDevices: this.state.myDevices.concat(deviceData) });
+  };
+
   render() {
     return (
       <div style={{ width: "100vw", height: "100vh" }}>
@@ -121,10 +128,17 @@ class App extends Component {
           style={{ width: "50vw", height: "50vh" }}
         >
           <SearchBar
+            onAddDevice={this.handleAddDevice}
             onChange={this.handleSearchStringChange}
             searchResults={this.state.searchResults}
           />
         </div>
+        {/* <div className="m-2" style={{ width: "50vw", height: "50vh" }}>
+          <OwnedDevices
+            onDelete={this.handleDelete}
+            ownedDevices={this.state.myDevices}
+          />
+        </div> */}
       </div>
     );
   }

@@ -8,7 +8,7 @@ class SearchResult extends Component {
   render() {
     return (
       <Button
-        onClick={() => this.props.onAddDevice(this.props.deviceInfo)}
+        onClick={this.props.onAddDevice(this.props.deviceInfo)}
         variant="light"
         className="m-2"
         border="0"
