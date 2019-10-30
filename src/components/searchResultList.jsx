@@ -17,23 +17,26 @@ class SearchResultList extends Component {
       <div
         className="container"
         style={{
-          width: "50rem",
-          height: "100vh",
           overflowY: "auto",
           overflowX: "hidden"
         }}
       >
-        {this.state.items.map(deviceInfo => (
+        {this.props.showResults
+          ? this.props.searchResults.map(deviceInfo => (
+              <Row
+              //style={{ height: "12rem" }}
+              >
+                <SearchResult key={deviceInfo.id} deviceInfo={deviceInfo} />
+              </Row>
+            ))
+          : null}
+        {/* {this.props.searchResults.map(deviceInfo => (
           <Row
           //style={{ height: "12rem" }}
           >
-            <SearchResult
-              key={deviceInfo.id}
-              deviceInfo={deviceInfo}
-              onDelete={this.handleDelete}
-            />
+            <SearchResult key={deviceInfo.id} deviceInfo={deviceInfo} />
           </Row>
-        ))}
+        ))} */}
       </div>
     );
   }

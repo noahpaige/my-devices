@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 //import NavBar from "./components/navbar";
-import OwnedDevices from "./components/ownedDevices";
-import SearchResultList from "./components/searchResultList";
 import SearchBar from "./components/searchBar";
 
 class App extends Component {
@@ -117,7 +115,10 @@ class App extends Component {
           className="align-middle m-2"
           style={{ width: "50vw", height: "50vh" }}
         >
-          <SearchBar onChange={this.handleSearchStringChange} />
+          <SearchBar
+            onChange={this.handleSearchStringChange}
+            searchResults={this.state.searchResults}
+          />
         </div>
       </div>
     );

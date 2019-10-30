@@ -12,11 +12,11 @@ class SearchResult extends Component {
         variant="light"
         className="m-2"
         border="0"
-        style={{ width: "100%", color: "0x00000066" }}
+        style={{ width: "100%" }}
       >
         <div className="gridContainer">
           <Row>
-            <Col xs={1}>
+            <Col xs={2}>
               <Image
                 src={this.props.deviceInfo.image}
                 rounded="true"
