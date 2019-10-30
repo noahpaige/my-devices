@@ -5,13 +5,8 @@ import SearchResult from "./searchResult";
 import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
 
-class SearchResultList extends Component {
+class SearchResults extends Component {
   state = {};
-
-  handleDelete = deviceId => {
-    const items = this.state.items.filter(d => d.id !== deviceId);
-    this.setState({ items });
-  };
 
   render() {
     return (
@@ -37,6 +32,7 @@ class SearchResultList extends Component {
                   <SearchResult
                     key={deviceInfo.wikiLink}
                     deviceInfo={deviceInfo}
+                    onAddDevice={this.props.onAddDevice}
                   />
                 </Row>
               ))
@@ -47,4 +43,4 @@ class SearchResultList extends Component {
   }
 }
 
-export default SearchResultList;
+export default SearchResults;

@@ -10,13 +10,21 @@ class ownedDevice extends Component {
       <Card border="primary" style={{ width: "100%" }}>
         <div className="gridContainer">
           <Row>
-            <Col xs={2}>
-              <Card.Img
-                src={this.props.deviceInfo.image}
-                rounded="true"
-                fluid="true"
-                style={{ verticalAlign: "middle" }}
-              />
+            <Col xs={2} style={{ position: "relative" }}>
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  marginLeft: "15px"
+                }}
+              >
+                <Card.Img
+                  src={this.props.deviceInfo.image}
+                  rounded="true"
+                  fluid="true"
+                />
+              </div>
             </Col>
             <Col>
               <Row>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
-//import NavBar from "./components/navbar";
 import SearchBar from "./components/searchBar";
+import OwnedDevices from "./components/ownedDevices";
 
 class App extends Component {
   state = {
@@ -113,14 +113,41 @@ class App extends Component {
     } else this.setState({ searchResults: [] });
   };
 
+  handleAddDevice = deviceData => {
+    this.setState({ previousResults: [] });
+    this.setState({ searchResults: [] });
+    this.setState({ myDevices: this.state.myDevices.concat(deviceData) });
+  };
+
   render() {
     return (
-      <div style={{ width: "100vw", height: "100vh" }}>
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          overflow: "hidden"
+        }}
+      >
+        <div
+          className="m-2"
+          style={{
+            width: "50vw",
+            height: "50vh",
+            overflow: "hidden",
+            margin: "0 auto"
+          }}
+        >
+          <OwnedDevices
+            onDelete={this.handleDelete}
+            ownedDevices={this.state.myDevices}
+          />
+        </div>
         <div
           className="align-middle m-2"
-          style={{ width: "50vw", height: "50vh" }}
+          style={{ width: "50vw", height: "38px" }}
         >
           <SearchBar
+            onAddDevice={this.handleAddDevice}
             onChange={this.handleSearchStringChange}
             searchResults={this.state.searchResults}
           />
