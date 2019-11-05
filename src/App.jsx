@@ -6,27 +6,38 @@ import OwnedDevices from "./components/ownedDevices";
 class App extends Component {
   state = {
     myDevices: [
-      {
-        id: 0,
-        name: "iPhone XR",
-        image:
-          "https://d3nevzfk7ii3be.cloudfront.net/igi/yiiosKwJCvSrNS12.thumbnail",
-        wikiLink: "https://www.ifixit.com/Device/iPhone_XR"
-      },
-      {
-        id: 1,
-        name: "Xbox One",
-        image:
-          "https://d3nevzfk7ii3be.cloudfront.net/igi/GtHYwOXhf6TNnp2h.large",
-        wikiLink: "https://www.ifixit.com/Device/Xbox_One"
-      }
+      // {
+      //   id: 0,
+      //   name: "iPhone XR",
+      //   image:
+      //     "https://d3nevzfk7ii3be.cloudfront.net/igi/yiiosKwJCvSrNS12.thumbnail",
+      //   wikiLink: "https://www.ifixit.com/Device/iPhone_XR"
+      // },
+      // {
+      //   id: 1,
+      //   name: "Xbox One",
+      //   image:
+      //     "https://d3nevzfk7ii3be.cloudfront.net/igi/GtHYwOXhf6TNnp2h.large",
+      //   wikiLink: "https://www.ifixit.com/Device/Xbox_One"
+      // }
     ],
     searchResults: [],
     previousResults: []
   };
 
+  componentDidMount() {
+    //const saveData = localStorage.getItem("myDevices");
+    const saveData = JSON.parse(localStorage.getItem("myDevices"));
+
+    console.log("myDevices = \n\n |" + saveData + "|");
+    saveData != null
+      ? this.setState({ myDevices: saveData })
+      : this.setState({ myDevices: [] });
+  }
+
   handleDelete = deviceId => {
     const myDevices = this.state.myDevices.filter(d => d.id !== deviceId);
+    localStorage.setItem("myDevices", JSON.stringify(myDevices));
     this.setState({ myDevices });
   };
 
@@ -35,7 +46,6 @@ class App extends Component {
       getFilteredResults(searchStr).then(response => {
         console.log("response: " + response);
         if (response.length > 0) {
-          console.log("HEROO");
           this.setState({ previousResults: this.state.searchResults });
           this.setState({ searchResults: response });
         } else this.setState({ searchResults: this.state.previousResults });
@@ -44,9 +54,11 @@ class App extends Component {
   };
 
   handleAddDevice = deviceData => {
+    const newDeviceState = this.state.myDevices.concat(deviceData);
     this.setState({ previousResults: [] });
     this.setState({ searchResults: [] });
-    this.setState({ myDevices: this.state.myDevices.concat(deviceData) });
+    this.setState({ myDevices: newDeviceState });
+    localStorage.setItem("myDevices", JSON.stringify(newDeviceState));
   };
 
   render() {

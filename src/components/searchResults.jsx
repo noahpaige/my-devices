@@ -26,17 +26,16 @@ class SearchResults extends Component {
             overflowX: "hidden"
           }}
         >
-          {this.props.showResults
-            ? this.props.searchResults.map(deviceInfo => (
-                <Row>
-                  <SearchResult
-                    key={deviceInfo.wikiLink}
-                    deviceInfo={deviceInfo}
-                    onAddDevice={this.props.onAddDevice}
-                  />
-                </Row>
-              ))
-            : null}
+          {this.props.showResults &&
+            this.props.searchResults.map(deviceInfo => (
+              <Row key={deviceInfo.id}>
+                <SearchResult
+                  key={deviceInfo.wikiLink}
+                  deviceInfo={deviceInfo}
+                  onAddDevice={this.props.onAddDevice}
+                />
+              </Row>
+            ))}
         </div>
       </div>
     );
