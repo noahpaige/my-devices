@@ -116,12 +116,9 @@ export default App;
 //================================ helper functions ================================
 
 function getFilteredResults(searchStr) {
-  // //https://www.ifixit.com/api/2.0/suggest/QUERYSTRING?doctypes=device
-  // let requestString = "https://www.ifixit.com/api/2.0/suggest/";
-  // requestString += removeSpaces(searchStr) + "?doctypes=device";
-  let requestString = "https://www.ifixit.com/api/2.0/search/";
-  requestString +=
-    removeSpaces(searchStr) + "?c-doctype_namespace=product&doctype=topic";
+  //https://www.ifixit.com/api/2.0/suggest/QUERYSTRING?doctypes=device
+  let requestString = "https://www.ifixit.com/api/2.0/suggest/";
+  requestString += removeSpaces(searchStr) + "?doctypes=device";
 
   let searchResults = fetch(requestString)
     .then(results => {
