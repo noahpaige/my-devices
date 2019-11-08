@@ -9,10 +9,17 @@ class SearchResult extends Component {
     return (
       <Button
         onClick={() => this.props.onAddDevice(this.props.deviceInfo)}
-        variant="light"
+        //variant="light"
         className="m-2"
         border="0"
-        style={{ width: "100%" }}
+        variant="light"
+        style={{
+          maxHeight: "70px",
+          width: "100%",
+          //backgroundColor: "#88a6b433",
+          border: "0px"
+          //color: "#222224"
+        }}
       >
         <div className="gridContainer">
           <Row>

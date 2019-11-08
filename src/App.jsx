@@ -3,6 +3,17 @@ import "./App.css";
 import SearchBar from "./components/searchBar";
 import OwnedDevices from "./components/ownedDevices";
 
+/* TODO: 
+ - change search results and owned devices to 'toasts'
+ - Add toast at bottom of screen when user adds device
+ - Add modal popup that shows if user has no saved devices 
+*/
+/*
+ - ifixit black: #222224
+ - ifixit blue: #0068d0
+ - ifixit off-white: #f7f9fa
+*/
+
 class App extends Component {
   state = {
     myDevices: [
@@ -26,10 +37,9 @@ class App extends Component {
   };
 
   componentDidMount() {
-    //const saveData = localStorage.getItem("myDevices");
     const saveData = JSON.parse(localStorage.getItem("myDevices"));
 
-    console.log("myDevices = \n\n |" + saveData + "|");
+    //console.log("myDevices = \n\n |" + saveData + "|");
     saveData != null
       ? this.setState({ myDevices: saveData })
       : this.setState({ myDevices: [] });
@@ -46,8 +56,10 @@ class App extends Component {
       getFilteredResults(searchStr).then(response => {
         console.log("response: " + response);
         if (response.length > 0) {
+          console.log("Prev results before: \n", this.state.previousResults);
           this.setState({ previousResults: this.state.searchResults });
           this.setState({ searchResults: response });
+          console.log("Prev results after: \n", this.state.previousResults);
         } else this.setState({ searchResults: this.state.previousResults });
       });
     } else this.setState({ searchResults: [] });
@@ -73,8 +85,8 @@ class App extends Component {
         <div
           className="m-2"
           style={{
-            width: "50vw",
-            height: "50vh",
+            width: "340px",
+            height: "50%",
             overflow: "hidden",
             margin: "0 auto"
           }}
@@ -86,7 +98,7 @@ class App extends Component {
         </div>
         <div
           className="align-middle m-2"
-          style={{ width: "50vw", height: "38px" }}
+          style={{ width: "340px", height: "38px" }}
         >
           <SearchBar
             onAddDevice={this.handleAddDevice}
@@ -104,6 +116,9 @@ export default App;
 //================================ helper functions ================================
 
 function getFilteredResults(searchStr) {
+  // //https://www.ifixit.com/api/2.0/suggest/QUERYSTRING?doctypes=device
+  // let requestString = "https://www.ifixit.com/api/2.0/suggest/";
+  // requestString += removeSpaces(searchStr) + "?doctypes=device";
   let requestString = "https://www.ifixit.com/api/2.0/search/";
   requestString +=
     removeSpaces(searchStr) + "?c-doctype_namespace=product&doctype=topic";

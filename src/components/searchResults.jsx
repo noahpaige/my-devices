@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 //import Device from "./device";
 import SearchResult from "./searchResult";
+import NoneResult from "./noneResult";
 
 import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
@@ -14,7 +15,7 @@ class SearchResults extends Component {
         style={{
           position: "relative",
           overflow: "hidden",
-          backgroundColor: "#dddddd",
+          backgroundColor: "#f7f9fa",
           margin: "2"
         }}
       >
@@ -23,10 +24,13 @@ class SearchResults extends Component {
           style={{
             width: "96%",
             overflowY: "auto",
-            overflowX: "hidden"
+            overflowX: "hidden",
+            borderWidth: "5px",
+            borderColor: "#000000"
           }}
         >
-          {this.props.showResults &&
+          {this.props.showResults && this.props.searchResults.length > 0 ? (
+            this.props.showResults &&
             this.props.searchResults.map(deviceInfo => (
               <Row key={deviceInfo.id}>
                 <SearchResult
@@ -35,7 +39,22 @@ class SearchResults extends Component {
                   onAddDevice={this.props.onAddDevice}
                 />
               </Row>
-            ))}
+            ))
+          ) : this.props.showResults ? (
+            <Row>
+              <NoneResult />
+            </Row>
+          ) : null}
+          {/* {this.props.showResults &&
+            this.props.searchResults.map(deviceInfo => (
+              <Row key={deviceInfo.id} style={{ maxHeight: "70px" }}>
+                <SearchResult
+                  key={deviceInfo.wikiLink}
+                  deviceInfo={deviceInfo}
+                  onAddDevice={this.props.onAddDevice}
+                />
+              </Row>
+            ))} */}
         </div>
       </div>
     );

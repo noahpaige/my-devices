@@ -17,7 +17,7 @@ class OwnedDevices extends Component {
           height: "100%",
           overflow: "hidden",
           padding: "5px",
-          backgroundColor: "#dddddd",
+          backgroundColor: "#ebeef0",
           borderRadius: "5px"
         }}
       >
