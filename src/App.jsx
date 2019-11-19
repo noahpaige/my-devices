@@ -102,8 +102,7 @@ class App extends Component {
           <div
             style={{
               height: "38px",
-              marginTop: "-8px",
-              marginLeft: "8px"
+              marginTop: "-8px"
             }}
           >
             <SearchBar
