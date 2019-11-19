@@ -23,9 +23,9 @@ body {
 
 .center-horizontally {
   position: absolute !important;
-  left: 50vw !important;
-  margin-right: -50vw !important;
-  transform: translate3d(-50vw, 0%, 0%) !important;
+  left: 50% !important;
+  margin-right: -50% !important;
+  transform: translate3d(-50%, 0%, 0%) !important;
 }
 
 .un-blur {
