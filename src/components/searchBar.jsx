@@ -1,8 +1,8 @@
-import "../styles/styles.css";
 import React, { Component, createRef } from "react";
 
 import FormControl from "react-bootstrap/FormControl";
 import SearchResults from "./searchResults";
+import "../styles/styles.css";
 
 class SearchBar extends Component {
   state = {
@@ -19,7 +19,6 @@ class SearchBar extends Component {
       this.setState({ showResults: true });
   };
   handleClickInside = () => {
-    console.log("CLICKED INSIDE");
     this.setState({ showResults: true });
   };
 
@@ -33,39 +32,65 @@ class SearchBar extends Component {
   }
 
   handleAddDevice = deviceInfo => {
+    this.setState({ showResults: false });
     this.setState({ inputValue: "" });
     this.props.onAddDevice(deviceInfo);
+  };
+  handleUnfocus = () => {
+    console.log("UNFOCUS");
+    this.setState({ showResults: false });
   };
 
   render() {
     return (
       <div
-        className="hide-scrollbar"
-        style={{ height: "38px" }}
-        ref={this.state.outerDivNode}
+        className=""
+        style={{
+          maxHeight: "32vh",
+          height: "32vh",
+          overflowX: "hidden",
+          overflowY: "hidden",
+          borderRadius: "5px"
+        }}
       >
-        <FormControl
-          onClick={this.handleClickInside}
-          onChange={event => this.handleChange(event.target.value)}
-          placeholder="Search for a device"
-          value={this.state.inputValue}
-          ref={this.state.textInputNode}
-        />
         <div
-          className="hide-scrollbar"
-          style={{
-            maxHeight: "300px",
-            position: "relative",
-            top: "3px",
-            overflowY: "scroll",
-            borderRadius: "5px"
-          }}
+          className="container"
+          style={{ height: "38px", width: "340px", padding: "0px" }}
+          ref={this.state.outerDivNode}
         >
-          <SearchResults
-            onAddDevice={this.handleAddDevice}
-            searchResults={this.props.searchResults}
-            showResults={this.state.showResults}
+          <FormControl
+            className="shadow search-bar"
+            onClick={this.handleClickInside}
+            onChange={event => this.handleChange(event.target.value)}
+            placeholder="Search for a device"
+            value={this.state.inputValue}
+            ref={this.state.textInputNode}
+            style={{
+              backgroundColor: "rgba(255, 255, 255, 0.3)",
+              width: "100%",
+              padding: "5px"
+            }}
           />
+          <div
+            className={this.state.showResults ? "shadow" : "hidden"}
+            style={{
+              position: "relative",
+              maxHeight: "26vh",
+              top: "1px",
+              overflowX: "hidden",
+              overflowY: "auto",
+              borderRadius: "5px",
+              backgroundColor: "rgba(255,255,255,0.3)",
+              padding: "10px"
+            }}
+          >
+            <SearchResults
+              onAddDevice={this.handleAddDevice}
+              searchResults={this.props.searchResults}
+              showResults={this.state.showResults}
+              onBlur={this.handleUnfocus}
+            />
+          </div>
         </div>
       </div>
     );

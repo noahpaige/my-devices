@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-//import Device from "./device";
 import SearchResult from "./searchResult";
 import NoneResult from "./noneResult";
 
 import Row from "react-bootstrap/Row";
-import Card from "react-bootstrap/Card";
+
+import "../styles/styles.css";
 
 class SearchResults extends Component {
   state = {};
@@ -12,51 +12,58 @@ class SearchResults extends Component {
   render() {
     return (
       <div
+        className={this.props.showResults ? "" : "hidden"}
         style={{
-          position: "relative",
-          overflow: "hidden",
-          backgroundColor: "#f7f9fa",
-          margin: "2"
+          height: "100%",
+          top: "1px",
+          borderRadius: "5px",
+          overflowY: "hidden",
+          overflowX: "hidden",
+          padding: "15px"
         }}
       >
-        <div
-          className="container"
-          style={{
-            width: "96%",
-            overflowY: "auto",
-            overflowX: "hidden",
-            borderWidth: "5px",
-            borderColor: "#000000"
-          }}
-        >
-          {this.props.showResults && this.props.searchResults.length > 0 ? (
-            this.props.showResults &&
-            this.props.searchResults.map(deviceInfo => (
-              <Row key={deviceInfo.id}>
-                <SearchResult
-                  key={deviceInfo.wikiLink}
-                  deviceInfo={deviceInfo}
-                  onAddDevice={this.props.onAddDevice}
-                />
-              </Row>
-            ))
-          ) : this.props.showResults ? (
-            <Row>
-              <NoneResult />
+        {this.props.searchResults.length > 0 ? (
+          this.props.showResults &&
+          this.props.searchResults.map(deviceInfo => (
+            <Row key={deviceInfo.id}>
+              <SearchResult
+                key={deviceInfo.wikiLink}
+                deviceInfo={deviceInfo}
+                onAddDevice={this.props.onAddDevice}
+              />
             </Row>
-          ) : null}
-          {/* {this.props.showResults &&
-            this.props.searchResults.map(deviceInfo => (
-              <Row key={deviceInfo.id} style={{ maxHeight: "70px" }}>
-                <SearchResult
-                  key={deviceInfo.wikiLink}
-                  deviceInfo={deviceInfo}
-                  onAddDevice={this.props.onAddDevice}
-                />
-              </Row>
-            ))} */}
-        </div>
+          ))
+        ) : this.props.showResults ? (
+          <Row>
+            <NoneResult />
+          </Row>
+        ) : null}
       </div>
+      // <div
+      //   className={this.props.showResults ? "" : "hidden"}
+      //   style={{
+      //     position: "relative",
+      //     overflowX: "hidden",
+      //     padding: "5px"
+      //   }}
+      // >
+      //   {this.props.searchResults.length > 0 ? (
+      //     this.props.showResults &&
+      //     this.props.searchResults.map(deviceInfo => (
+      //       <Row key={deviceInfo.id}>
+      //         <SearchResult
+      //           key={deviceInfo.wikiLink}
+      //           deviceInfo={deviceInfo}
+      //           onAddDevice={this.props.onAddDevice}
+      //         />
+      //       </Row>
+      //     ))
+      //   ) : this.props.showResults ? (
+      //     <Row>
+      //       <NoneResult />
+      //     </Row>
+      //   ) : null}
+      // </div>
     );
   }
 }

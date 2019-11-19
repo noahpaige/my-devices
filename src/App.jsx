@@ -1,18 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
+
 import SearchBar from "./components/searchBar";
 import OwnedDevices from "./components/ownedDevices";
-
-/* TODO: 
- - change search results and owned devices to 'toasts'
- - Add toast at bottom of screen when user adds device
- - Add modal popup that shows if user has no saved devices 
-*/
-/*
- - ifixit black: #222224
- - ifixit blue: #0068d0
- - ifixit off-white: #f7f9fa
-*/
 
 class App extends Component {
   state = {
@@ -33,13 +23,12 @@ class App extends Component {
       // }
     ],
     searchResults: [],
-    previousResults: []
+    previousResults: [],
+    showResults: false
   };
 
   componentDidMount() {
     const saveData = JSON.parse(localStorage.getItem("myDevices"));
-
-    //console.log("myDevices = \n\n |" + saveData + "|");
     saveData != null
       ? this.setState({ myDevices: saveData })
       : this.setState({ myDevices: [] });
@@ -56,21 +45,26 @@ class App extends Component {
       getFilteredResults(searchStr).then(response => {
         console.log("response: " + response);
         if (response.length > 0) {
-          console.log("Prev results before: \n", this.state.previousResults);
           this.setState({ previousResults: this.state.searchResults });
           this.setState({ searchResults: response });
-          console.log("Prev results after: \n", this.state.previousResults);
         } else this.setState({ searchResults: this.state.previousResults });
       });
-    } else this.setState({ searchResults: [] });
+      this.setState({ showResults: true });
+    } else {
+      this.setState({ searchResults: [] });
+      this.setState({ showResults: false });
+    }
   };
 
   handleAddDevice = deviceData => {
-    const newDeviceState = this.state.myDevices.concat(deviceData);
+    if (!includesDevice(deviceData, this.state.myDevices)) {
+      const newDeviceState = this.state.myDevices.concat(deviceData);
+      this.setState({ myDevices: newDeviceState });
+      localStorage.setItem("myDevices", JSON.stringify(newDeviceState));
+    }
+    this.setState({ showResults: false });
     this.setState({ previousResults: [] });
     this.setState({ searchResults: [] });
-    this.setState({ myDevices: newDeviceState });
-    localStorage.setItem("myDevices", JSON.stringify(newDeviceState));
   };
 
   render() {
@@ -82,29 +76,43 @@ class App extends Component {
           overflow: "hidden"
         }}
       >
-        <div
-          className="m-2"
-          style={{
-            width: "340px",
-            height: "50%",
-            overflow: "hidden",
-            margin: "0 auto"
-          }}
-        >
-          <OwnedDevices
-            onDelete={this.handleDelete}
-            ownedDevices={this.state.myDevices}
-          />
-        </div>
-        <div
-          className="align-middle m-2"
-          style={{ width: "340px", height: "38px" }}
-        >
-          <SearchBar
-            onAddDevice={this.handleAddDevice}
-            onChange={this.handleSearchStringChange}
-            searchResults={this.state.searchResults}
-          />
+        <div className="center-horizontally">
+          <h1
+            className="font-weight-light text-center"
+            style={{ color: " #0068d0", marginTop: "16px" }}
+          >
+            My Devices
+          </h1>
+          <div
+            className="m-2 shadow"
+            style={{
+              display: "inline-block",
+              width: "340px",
+              height: "50vh",
+              overflow: "hidden",
+              margin: "0 auto",
+              borderRadius: "4px"
+            }}
+          >
+            <OwnedDevices
+              onDelete={this.handleDelete}
+              ownedDevices={this.state.myDevices}
+            />
+          </div>
+          <div
+            style={{
+              height: "38px",
+              marginTop: "-8px",
+              marginLeft: "8px"
+            }}
+          >
+            <SearchBar
+              onAddDevice={this.handleAddDevice}
+              onChange={this.handleSearchStringChange}
+              searchResults={this.state.searchResults}
+              showResults={this.state.showResults}
+            />
+          </div>
         </div>
       </div>
     );
@@ -154,4 +162,12 @@ function filterAndFormatResults(searchData) {
     }
   }
   return output;
+}
+
+function includesDevice(deviceData, myDevices) {
+  for (let i = 0; i < myDevices.length; i++) {
+    const device = myDevices[i];
+    if (device.id === deviceData.id) return true;
+  }
+  return false;
 }

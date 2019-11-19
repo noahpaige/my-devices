@@ -10,14 +10,14 @@ class OwnedDevices extends Component {
   render() {
     return (
       <div
-        className="hide-scrollbar"
+        className="new-scrollbar un-blur"
         style={{
           position: "relative",
           width: "100%",
           height: "100%",
           overflow: "hidden",
           padding: "5px",
-          backgroundColor: "#ebeef0",
+          backgroundColor: "rgba(255,255,255,0.3)",
           borderRadius: "5px"
         }}
       >
@@ -37,6 +37,7 @@ class OwnedDevices extends Component {
                 marginLeft: "-6px",
                 marginRight: "-6px"
               }}
+              key={deviceInfo.id}
             >
               <OwnedDevice
                 key={deviceInfo.id}

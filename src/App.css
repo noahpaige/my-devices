@@ -3,24 +3,19 @@
 }
 
 #root {
-  background-color: #ffffff;
+  background: rgb(222, 224, 224);
+  background: linear-gradient(0deg, rgba(222, 224, 224, 1) 75%, rgba(247, 249, 250, 1) 100%);
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
-.App-logo {
-  height: 40vmin;
+.center-horizontally {
+  position: absolute;
+  height: 100vh;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, 0%);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
+.hidden {
+  visibility: hidden;
 }

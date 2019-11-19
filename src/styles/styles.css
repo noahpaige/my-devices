@@ -1,3 +1,82 @@
 .hide-scrollbar ::-webkit-scrollbar {
     display: none;
 }
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #bcbec0;
+    border-radius: 6px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #c5c8c9;
+}
+
+body {
+    background-color: #222224;
+}
+
+.center-horizontally {
+    position: absolute;
+    left: 50vw;
+    margin-right: -50vw;
+    transform: translate3d(-50vw, 0%, 0%);
+}
+
+.un-blur {
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+input:focus {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.03);
+}
+
+.wiki-button {
+    border: 1px solid #0068d0;
+    background-color: rgba(0, 0, 0, 0);
+    color: #0068d0;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    font-size: 1em;
+    width: 100%;
+    height: 34px;
+    -webkit-transition-duration: 0.2s;
+    /* Safari */
+    transition-duration: 0.2s;
+}
+
+.wiki-button:active {
+    background-color: rgba(2, 85, 168, 0.2);
+    border: 2px solid #0255a8;
+    color: #0255a8;
+}
+
+.wiki-button:hover {
+    background-color: rgba(38, 147, 255, 0.05);
+    border-color: #2693ff;
+    color: #2693ff;
+    font-size: 1.03em;
+}
+
+.shadow {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.0);
+    -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.0);
+}
+
+.shadow:focus {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.0);
+    -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.0);
+}
+
+button:focus,
+input:focus,
+select:focus {
+    outline: none !important;
+    box-shadow: none;
+}

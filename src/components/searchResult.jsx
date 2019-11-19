@@ -23,7 +23,7 @@ class SearchResult extends Component {
       >
         <div className="gridContainer">
           <Row>
-            <Col xs={2}>
+            <Col xs={3} className="align-middle">
               <Image
                 src={this.props.deviceInfo.image}
                 rounded="true"
