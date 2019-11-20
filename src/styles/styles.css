@@ -64,6 +64,10 @@ input:focus {
   font-size: 1.03em;
 }
 
+.truncate-text {
+  text-overflow: clip;
+}
+
 .shadow {
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0);
   -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0);
@@ -78,5 +82,9 @@ button:focus,
 input:focus,
 select:focus {
   outline: none !important;
-  box-shadow: none;
+  box-shadow: none !important;
+}
+
+input:focus {
+  border: 1px solid transparent;
 }

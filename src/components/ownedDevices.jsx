@@ -16,7 +16,8 @@ class OwnedDevices extends Component {
           width: "100%",
           height: "100%",
           overflow: "hidden",
-          padding: "5px",
+          padding: "10px",
+          paddingRight: "0px",
           backgroundColor: "rgba(255,255,255,0.3)",
           borderRadius: "5px"
         }}
@@ -33,7 +34,7 @@ class OwnedDevices extends Component {
           {this.props.ownedDevices.map(deviceInfo => (
             <Row
               style={{
-                marginTop: "6px",
+                marginTop: "8px",
                 marginLeft: "-6px",
                 marginRight: "-6px"
               }}

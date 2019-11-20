@@ -48,49 +48,54 @@ class SearchBar extends Component {
         style={{
           maxHeight: "32vh",
           height: "32vh",
-          overflowX: "hidden",
-          overflowY: "hidden",
+          width: "360px",
           borderRadius: "5px"
         }}
       >
         <div
-          className="container"
-          style={{ height: "38px", width: "340px", padding: "0px" }}
+          className="shadow"
+          style={{
+            height: "38px",
+            width: "340px",
+            padding: "0px",
+            marginLeft: "8px"
+          }}
           ref={this.state.outerDivNode}
         >
           <FormControl
-            className="shadow search-bar"
+            className="search-bar"
             onClick={this.handleClickInside}
             onChange={event => this.handleChange(event.target.value)}
             placeholder="Search for a device"
             value={this.state.inputValue}
             ref={this.state.textInputNode}
             style={{
-              backgroundColor: "rgba(255, 255, 255, 0.3)",
+              backgroundColor: "rgba(255, 255, 255, 0.6)",
               width: "100%",
               padding: "5px"
             }}
           />
-          <div
-            className={this.state.showResults ? "shadow" : "hidden"}
-            style={{
-              position: "relative",
-              maxHeight: "26vh",
-              top: "1px",
-              overflowX: "hidden",
-              overflowY: "auto",
-              borderRadius: "5px",
-              backgroundColor: "rgba(255,255,255,0.3)",
-              padding: "10px"
-            }}
-          >
-            <SearchResults
-              onAddDevice={this.handleAddDevice}
-              searchResults={this.props.searchResults}
-              showResults={this.state.showResults}
-              onBlur={this.handleUnfocus}
-            />
-          </div>
+        </div>
+        <div
+          className={this.state.showResults ? "shadow" : "hidden"}
+          style={{
+            maxHeight: "26vh",
+            width: "340px",
+            top: "1px",
+            overflowX: "hidden",
+            overflowY: "auto",
+            borderRadius: "5px",
+            backgroundColor: "rgba(255,255,255,0.3)",
+            padding: "5px",
+            marginLeft: "8px"
+          }}
+        >
+          <SearchResults
+            onAddDevice={this.handleAddDevice}
+            searchResults={this.props.searchResults}
+            showResults={this.state.showResults}
+            onBlur={this.handleUnfocus}
+          />
         </div>
       </div>
     );

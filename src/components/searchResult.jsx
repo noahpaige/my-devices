@@ -4,26 +4,26 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+import "../styles/styles.css";
+
 class SearchResult extends Component {
   render() {
     return (
       <Button
         onClick={() => this.props.onAddDevice(this.props.deviceInfo)}
-        //variant="light"
         className="m-2"
         border="0"
         variant="light"
         style={{
-          maxHeight: "70px",
           width: "100%",
-          //backgroundColor: "#88a6b433",
-          border: "0px"
-          //color: "#222224"
+          border: "0px",
+          marginTop: "0px",
+          borderRadius: "8px"
         }}
       >
         <div className="gridContainer">
           <Row>
-            <Col xs={3} className="align-middle">
+            <Col xs={4} className="align-middle">
               <Image
                 src={this.props.deviceInfo.image}
                 rounded="true"
@@ -33,8 +33,16 @@ class SearchResult extends Component {
                 }}
               />
             </Col>
-            <Col style={{ display: "flex" }}>
-              <h5 style={{ margin: "auto" }}>{this.props.deviceInfo.name}</h5>
+            <Col
+              style={{
+                display: "flex",
+                verticalAlign: "left",
+                color: "#6c757d"
+              }}
+            >
+              <p className="align-left" style={{ margin: "auto" }}>
+                {this.props.deviceInfo.name}
+              </p>
             </Col>
           </Row>
         </div>

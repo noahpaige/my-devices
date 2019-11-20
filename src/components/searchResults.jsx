@@ -17,9 +17,9 @@ class SearchResults extends Component {
           height: "100%",
           top: "1px",
           borderRadius: "5px",
-          overflowY: "hidden",
+          overflowY: "auto",
           overflowX: "hidden",
-          padding: "15px"
+          padding: "5px"
         }}
       >
         {this.props.searchResults.length > 0 ? (
@@ -39,31 +39,6 @@ class SearchResults extends Component {
           </Row>
         ) : null}
       </div>
-      // <div
-      //   className={this.props.showResults ? "" : "hidden"}
-      //   style={{
-      //     position: "relative",
-      //     overflowX: "hidden",
-      //     padding: "5px"
-      //   }}
-      // >
-      //   {this.props.searchResults.length > 0 ? (
-      //     this.props.showResults &&
-      //     this.props.searchResults.map(deviceInfo => (
-      //       <Row key={deviceInfo.id}>
-      //         <SearchResult
-      //           key={deviceInfo.wikiLink}
-      //           deviceInfo={deviceInfo}
-      //           onAddDevice={this.props.onAddDevice}
-      //         />
-      //       </Row>
-      //     ))
-      //   ) : this.props.showResults ? (
-      //     <Row>
-      //       <NoneResult />
-      //     </Row>
-      //   ) : null}
-      // </div>
     );
   }
 }
